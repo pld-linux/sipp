@@ -1,0 +1,22 @@
+diff -urN sipp-3.0.src.org/call.cpp sipp-3.0.src/call.cpp
+--- sipp-3.0.src.org/call.cpp	2007-11-06 11:18:07.000000000 +0100
++++ sipp-3.0.src/call.cpp	2008-08-21 14:31:22.054118798 +0200
+@@ -41,6 +41,7 @@
+ #include <iostream>
+ #include <sys/types.h>
+ #include <sys/wait.h>
++#include <limits.h>
+ 
+ #ifdef PCAPPLAY
+ #include "send_packets.h"
+diff -urN sipp-3.0.src.org/scenario.cpp sipp-3.0.src/scenario.cpp
+--- sipp-3.0.src.org/scenario.cpp	2007-07-26 12:16:49.000000000 +0200
++++ sipp-3.0.src/scenario.cpp	2008-08-21 14:30:20.810792636 +0200
+@@ -27,6 +27,7 @@
+  */
+ 
+ #include <stdlib.h>
++#include <limits.h>
+ #include "sipp.hpp"
+ #ifdef HAVE_GSL
+ #include <gsl/gsl_rng.h>
