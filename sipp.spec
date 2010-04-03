@@ -2,7 +2,7 @@
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Name:		sipp
 Version:	3.0
-Release:	1
+Release:	2
 License:	GPL v2+ except two files under BSD
 Group:		Applications
 Source0:	http://dl.sourceforge.net/sipp/%{name}-%{version}.src.tar.gz
