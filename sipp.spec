@@ -44,7 +44,6 @@ system.
 	EXTRACFLAGS="%{rpmcflags}" \
 	EXTRACPPFLAGS="%{rpmcxxflags}" \
 	EXTRALFLAGS="%{rpmldflags}" \
-	EXTRALIBS="-ltinfo" \
 	INCDIR="-I. -I/usr/include/ncurses"
 
 %install
