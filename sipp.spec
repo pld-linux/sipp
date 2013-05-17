@@ -1,13 +1,14 @@
 #
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Name:		sipp
-Version:	3.0
-Release:	5
+Version:	3.3
+Release:	1
 License:	GPL v2+ except two files under BSD
 Group:		Applications
-Source0:	http://dl.sourceforge.net/sipp/%{name}-%{version}.src.tar.gz
-# Source0-md5:	31906c63eb5efa09e0b148c27435cdac
+Source0:	http://dl.sourceforge.net/sipp/%{name}-%{version}.tar.xz
+# Source0-md5:	f0c4f472fa86de8a528cb91616323617
 Patch0:		%{name}-headers.patch
+Patch1:		%{name}-sprintf.patch
 URL:		http://sipp.sourceforge.net/
 BuildRequires:	libpcap-devel
 BuildRequires:	libstdc++-devel
@@ -32,8 +33,9 @@ very useful to emulate thousands of user agents calling your SIP
 system.
 
 %prep
-%setup -q -n %{name}-%{version}.src
+%setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 

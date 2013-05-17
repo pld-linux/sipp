@@ -1,0 +1,12 @@
+diff -dur sipp-3.3.orig/stat.cpp sipp-3.3/stat.cpp
+--- sipp-3.3.orig/stat.cpp	2012-12-22 02:50:15.000000000 +0100
++++ sipp-3.3/stat.cpp	2013-05-17 12:11:26.000000000 +0200
+@@ -1148,7 +1148,7 @@
+     {
+       // if a repartition is present, this field match the repartition name
+       repartitionInfo = (char *)realloc(repartitionInfo, dlen + 1);
+-      sprintf(repartitionInfo, stat_delimiter);
++      strcpy(stat_delimiter, repartitionInfo);
+       for(int i=0; i<(sizeOfTab-1); i++)
+         {   
+           sprintf(buffer, "%lu%s", tabRepartition[i].nbInThisBorder, stat_delimiter);
