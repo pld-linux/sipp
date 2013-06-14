@@ -1,4 +1,3 @@
-#
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Name:		sipp
 Version:	3.3
@@ -9,6 +8,7 @@ Source0:	http://dl.sourceforge.net/sipp/%{name}-%{version}.tar.xz
 # Source0-md5:	f0c4f472fa86de8a528cb91616323617
 Patch0:		%{name}-headers.patch
 Patch1:		%{name}-sprintf.patch
+Patch2:		%{name}-stats_crash.patch
 URL:		http://sipp.sourceforge.net/
 BuildRequires:	libpcap-devel
 BuildRequires:	libstdc++-devel
@@ -36,6 +36,7 @@ system.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 
