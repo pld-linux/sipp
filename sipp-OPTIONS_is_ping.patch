@@ -1,0 +1,24 @@
+diff -dur -x '*~' sipp-3.3.orig/call.cpp sipp-3.3/call.cpp
+--- sipp-3.3.orig/call.cpp	2013-06-14 15:24:31.000000000 +0200
++++ sipp-3.3/call.cpp	2013-06-14 15:37:04.000000000 +0200
+@@ -3963,7 +3963,7 @@
+     return E_AM_UNEXP_BYE;
+   } else if (strcmp(P_recv, "CANCEL") == 0) {
+     return E_AM_UNEXP_CANCEL;
+-  } else if (strcmp(P_recv, "PING") == 0) {
++  } else if (strcmp(P_recv, "PING") == 0 || strcmp(P_recv, "OPTIONS") == 0) {
+     return E_AM_PING;
+   } else if (((strcmp(P_recv, "INFO") == 0) || (strcmp(P_recv, "NOTIFY") == 0) || (strcmp(P_recv, "UPDATE") == 0)) 
+                && (auto_answer == true)){
+Only in sipp-3.3.orig: call.cpp.orig
+diff -dur -x '*~' sipp-3.3.orig/sipp.cpp sipp-3.3/sipp.cpp
+--- sipp-3.3.orig/sipp.cpp	2013-02-07 00:11:47.000000000 +0100
++++ sipp-3.3/sipp.cpp	2013-06-14 15:38:04.000000000 +0200
+@@ -3410,6 +3410,7 @@
+     } else if (auto_answer &&
+               ((strstr(msg, "NOTIFY") == msg)  ||
+                (strstr(msg, "INFO")   == msg)  ||
++               (strstr(msg, "OPTIONS")== msg)  ||
+                (strstr(msg, "UPDATE") == msg))) {
+ 	  // If auto answer mode, try to answer the incoming message
+ 	  // with automaticResponseMode

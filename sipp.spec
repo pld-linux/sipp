@@ -1,3 +1,8 @@
+
+%bcond_with	options_is_ping # make sipp treat OPTIONS same as PING
+				# changes sipp behaviour, but that is
+				# what everybody use for 'pinging'
+
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Name:		sipp
 Version:	3.3
@@ -9,6 +14,7 @@ Source0:	http://dl.sourceforge.net/sipp/%{name}-%{version}.tar.xz
 Patch0:		%{name}-headers.patch
 Patch1:		%{name}-sprintf.patch
 Patch2:		%{name}-stats_crash.patch
+Patch3:		%{name}-OPTIONS_is_ping.patch
 URL:		http://sipp.sourceforge.net/
 BuildRequires:	libpcap-devel
 BuildRequires:	libstdc++-devel
@@ -37,6 +43,7 @@ system.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%{?with_options_is_ping:%patch3 -p1}
 
 %build
 
