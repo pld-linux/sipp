@@ -10,7 +10,7 @@ Release:	1
 License:	GPL v2+ except two files under BSD
 Group:		Applications
 Source0:	https://github.com/SIPp/sipp/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	dcc658e735c28055d6052a36b331964f
+# Source0-md5:	c14e4c84975337ce952f03a38ddba7ec
 Patch0:		%{name}-OPTIONS_is_ping.patch
 URL:		http://sipp.sourceforge.net/
 BuildRequires:	gsl-devel
