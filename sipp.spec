@@ -5,17 +5,15 @@
 
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Name:		sipp
-Version:	3.3
+Version:	3.5.1
 Release:	1
 License:	GPL v2+ except two files under BSD
 Group:		Applications
-Source0:	http://download.sourceforge.net/sipp/%{name}-%{version}.tar.xz
-# Source0-md5:	f0c4f472fa86de8a528cb91616323617
-Patch0:		%{name}-headers.patch
-Patch1:		%{name}-sprintf.patch
-Patch2:		%{name}-stats_crash.patch
-Patch3:		%{name}-OPTIONS_is_ping.patch
+Source0:	https://github.com/SIPp/sipp/releases/download/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	dcc658e735c28055d6052a36b331964f
+Patch0:		%{name}-OPTIONS_is_ping.patch
 URL:		http://sipp.sourceforge.net/
+BuildRequires:	gsl-devel
 BuildRequires:	libpcap-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
@@ -40,31 +38,29 @@ system.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%{?with_options_is_ping:%patch3 -p1}
+%{?with_options_is_ping:%patch0 -p1}
 
 %build
-
-%{__make} pcapplay_ossl \
-	CC="%{__cc}" \
-	CPP="%{__cxx}" \
-	CCLINK="%{__cxx}" \
-	EXTRACFLAGS="%{rpmcflags}" \
-	EXTRACPPFLAGS="%{rpmcxxflags}" \
-	EXTRALFLAGS="%{rpmldflags}" \
-	INCDIR="-I. -I/usr/include/ncurses"
+%configure \
+	--disable-silent-rules \
+	--enable-epoll \
+	--with-openssl \
+	--with-pcap \
+	--with-sctp \
+	--with-gsl
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
-install sipp $RPM_BUILD_ROOT%{_bindir}
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt MEDIA.txt README.txt pcap tools
-%attr(755,root,root) %{_bindir}/*
+%doc CHANGES.md FAQ.md README.md THANKS
+%attr(755,root,root) %{_bindir}/sipp
+%{_mandir}/man1/sipp.1*
