@@ -7,15 +7,14 @@
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Summary(pl.UTF-8):	SIPp - narzędzie do testowania wydajności protokołu SIP
 Name:		sipp
-Version:	3.5.1
-Release:	4
+Version:	3.6.0
+Release:	1
 License:	GPL v2+ except two files under BSD
 Group:		Applications/Communications
 #Source0Download: https://github.com/SIPp/sipp/releases/
 Source0:	https://github.com/SIPp/sipp/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	c14e4c84975337ce952f03a38ddba7ec
+# Source0-md5:	1fd27333d179d786d3f6a67ee451fae9
 Patch0:		%{name}-OPTIONS_is_ping.patch
-Patch1:		openssl.patch
 URL:		http://sipp.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -64,7 +63,6 @@ do systemu SIP.
 %prep
 %setup -q
 %{?with_options_is_ping:%patch0 -p1}
-%patch1 -p1
 
 %build
 %{__aclocal}
@@ -90,6 +88,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.md FAQ.md LICENSE.txt README.md THANKS
+%doc CHANGES.md LICENSE.txt README.md THANKS
 %attr(755,root,root) %{_bindir}/sipp
 %{_mandir}/man1/sipp.1*
