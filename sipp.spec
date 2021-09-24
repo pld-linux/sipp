@@ -8,7 +8,7 @@ Summary:	SIPp - a performance testing tool for the SIP protocol
 Summary(pl.UTF-8):	SIPp - narzędzie do testowania wydajności protokołu SIP
 Name:		sipp
 Version:	3.6.0
-Release:	1
+Release:	2
 License:	GPL v2+ except two files under BSD
 Group:		Applications/Communications
 #Source0Download: https://github.com/SIPp/sipp/releases/
