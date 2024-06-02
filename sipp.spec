@@ -26,6 +26,7 @@ BuildRequires:	ncurses-devel
 # or wolfssl-devel >= 3.15.0
 BuildRequires:	openssl-devel >= 0.9.8
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
