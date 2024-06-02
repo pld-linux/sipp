@@ -7,24 +7,25 @@
 Summary:	SIPp - a performance testing tool for the SIP protocol
 Summary(pl.UTF-8):	SIPp - narzędzie do testowania wydajności protokołu SIP
 Name:		sipp
-Version:	3.6.0
-Release:	3
+Version:	3.7.2
+Release:	1
 License:	GPL v2+ except two files under BSD
 Group:		Applications/Communications
 #Source0Download: https://github.com/SIPp/sipp/releases/
 Source0:	https://github.com/SIPp/sipp/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	1fd27333d179d786d3f6a67ee451fae9
+# Source0-md5:	bd99a023e15b4c9dbdbfe4b95cb9cdf9
 Patch0:		%{name}-OPTIONS_is_ping.patch
-URL:		http://sipp.sourceforge.net/
-BuildRequires:	autoconf
-BuildRequires:	automake
+URL:		https://sipp.sourceforge.net/
+BuildRequires:	cmake >= 3.4
 BuildRequires:	gsl-devel
 BuildRequires:	help2man
 BuildRequires:	libpcap-devel
 BuildRequires:	libsctp-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	ncurses-devel
-BuildRequires:	openssl-devel
+# or wolfssl-devel >= 3.15.0
+BuildRequires:	openssl-devel >= 0.9.8
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -65,23 +66,22 @@ do systemu SIP.
 %{?with_options_is_ping:%patch0 -p1}
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure \
-	--disable-silent-rules \
-	--enable-epoll \
-	--with-openssl \
-	--with-pcap \
-	--with-sctp \
-	--with-gsl
+install -d build
+cd build
+%cmake .. \
+	-DUSE_PCAP=ON \
+	-DUSE_SCTP=ON \
+	-DUSE_SSL=ON
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install -Dp sipp.1 $RPM_BUILD_ROOT%{_mandir}/man1/sipp.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
